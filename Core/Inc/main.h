@@ -29,6 +29,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
+#include "software_timer.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -66,8 +67,8 @@ void Error_Handler(void);
 #define SET_GPIO_Port GPIOA
 #define RED_LED1_Pin GPIO_PIN_3
 #define RED_LED1_GPIO_Port GPIOA
-#define YELLOW_RED1_Pin GPIO_PIN_4
-#define YELLOW_RED1_GPIO_Port GPIOA
+#define YELLOW_LED1_Pin GPIO_PIN_4
+#define YELLOW_LED1_GPIO_Port GPIOA
 #define GREEN_LED1_Pin GPIO_PIN_5
 #define GREEN_LED1_GPIO_Port GPIOA
 #define RED_LED2_Pin GPIO_PIN_6
