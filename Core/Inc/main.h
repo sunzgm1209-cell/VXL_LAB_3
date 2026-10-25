@@ -29,8 +29,6 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
-#include "software_timer.h"
-#include "input_processing.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -62,12 +60,28 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define MODE_Pin GPIO_PIN_0
 #define MODE_GPIO_Port GPIOA
+#define INC_Pin GPIO_PIN_1
+#define INC_GPIO_Port GPIOA
+#define SET_Pin GPIO_PIN_2
+#define SET_GPIO_Port GPIOA
+#define RED_LED1_Pin GPIO_PIN_3
+#define RED_LED1_GPIO_Port GPIOA
+#define YELLOW_RED1_Pin GPIO_PIN_4
+#define YELLOW_RED1_GPIO_Port GPIOA
+#define GREEN_LED1_Pin GPIO_PIN_5
+#define GREEN_LED1_GPIO_Port GPIOA
+#define RED_LED2_Pin GPIO_PIN_6
+#define RED_LED2_GPIO_Port GPIOA
+#define YELLOW_LED2_Pin GPIO_PIN_7
+#define YELLOW_LED2_GPIO_Port GPIOA
 #define SEG0_Pin GPIO_PIN_0
 #define SEG0_GPIO_Port GPIOB
 #define SEG1_Pin GPIO_PIN_1
 #define SEG1_GPIO_Port GPIOB
 #define SEG2_Pin GPIO_PIN_2
 #define SEG2_GPIO_Port GPIOB
+#define GREEN_LED2_Pin GPIO_PIN_8
+#define GREEN_LED2_GPIO_Port GPIOA
 #define SEG3_Pin GPIO_PIN_3
 #define SEG3_GPIO_Port GPIOB
 #define SEG4_Pin GPIO_PIN_4

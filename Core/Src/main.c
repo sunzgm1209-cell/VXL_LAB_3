@@ -197,14 +197,27 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin|YELLOW_RED1_Pin|GREEN_LED1_Pin|RED_LED2_Pin
+                          |YELLOW_LED2_Pin|GREEN_LED2_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOB, SEG0_Pin|SEG1_Pin|SEG2_Pin|SEG3_Pin
                           |SEG4_Pin|SEG5_Pin|SEG6_Pin|EN_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pin : MODE_Pin */
-  GPIO_InitStruct.Pin = MODE_Pin;
+  /*Configure GPIO pins : MODE_Pin INC_Pin SET_Pin */
+  GPIO_InitStruct.Pin = MODE_Pin|INC_Pin|SET_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
-  HAL_GPIO_Init(MODE_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : RED_LED1_Pin YELLOW_RED1_Pin GREEN_LED1_Pin RED_LED2_Pin
+                           YELLOW_LED2_Pin GREEN_LED2_Pin */
+  GPIO_InitStruct.Pin = RED_LED1_Pin|YELLOW_RED1_Pin|GREEN_LED1_Pin|RED_LED2_Pin
+                          |YELLOW_LED2_Pin|GREEN_LED2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : SEG0_Pin SEG1_Pin SEG2_Pin SEG3_Pin
                            SEG4_Pin SEG5_Pin SEG6_Pin EN_Pin */
