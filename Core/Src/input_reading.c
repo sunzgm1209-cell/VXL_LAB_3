@@ -13,16 +13,16 @@
 #define BUTTON_IS_PRESSED GPIO_PIN_RESET
 #define BUTTON_IS_RELEASED GPIO_PIN_SET
 
-// Mang luu tru Port va Pin cua 3 nut nhan (Gia su PA0, PA1, PA2)
+
 GPIO_TypeDef* buttonPort[NO_OF_BUTTONS] = {GPIOA, GPIOA, GPIOA};
 uint16_t buttonPin[NO_OF_BUTTONS] = {GPIO_PIN_0, GPIO_PIN_1, GPIO_PIN_2};
 
-static GPIO_PinState buttonBuffer[NO_OF_BUTTONS];
-static GPIO_PinState debounceButtonBuffer1[NO_OF_BUTTONS];
-static GPIO_PinState debounceButtonBuffer2[NO_OF_BUTTONS];
+static GPIO_PinState buttonBuffer[NO_OF_BUTTONS] = {BUTTON_IS_RELEASED, BUTTON_IS_RELEASED, BUTTON_IS_RELEASED};
+static GPIO_PinState debounceButtonBuffer1[NO_OF_BUTTONS] = {BUTTON_IS_RELEASED, BUTTON_IS_RELEASED, BUTTON_IS_RELEASED};
+static GPIO_PinState debounceButtonBuffer2[NO_OF_BUTTONS] = {BUTTON_IS_RELEASED, BUTTON_IS_RELEASED, BUTTON_IS_RELEASED};
 
-static uint8_t flagForButtonPress1s[NO_OF_BUTTONS];
-static uint16_t counterForButtonPress1s[NO_OF_BUTTONS];
+static uint8_t flagForButtonPress1s[NO_OF_BUTTONS] = {0, 0, 0};
+static uint16_t counterForButtonPress1s[NO_OF_BUTTONS] = {0, 0, 0};
 
 void button_reading(void){
     for(char i = 0; i < NO_OF_BUTTONS; i++){
@@ -50,7 +50,17 @@ void button_reading(void){
 
 unsigned char is_button_pressed(unsigned char index){
     if(index >= NO_OF_BUTTONS) return 0;
-    return (buttonBuffer[index] == BUTTON_IS_PRESSED);
+    static int button_pressed_flag[NO_OF_BUTTONS] = {0, 0, 0};
+
+    if (buttonBuffer[index] == BUTTON_IS_PRESSED) {
+    	if (button_pressed_flag[index] == 0) {
+         	button_pressed_flag[index] = 1;
+          	return 1;
+        }
+    } else {
+       	button_pressed_flag[index] = 0;
+    }
+	return 0;
 }
 
 unsigned char is_button_pressed_1s(unsigned char index){

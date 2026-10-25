@@ -7,6 +7,8 @@
 
 #include "input_processing.h"
 
+int current_mode = 1;
+
 enum ButtonState {BUTTON_RELEASED, BUTTON_PRESSED, BUTTON_PRESSED_MORE_THAN_1_SECOND};
 enum ButtonState buttonState = BUTTON_RELEASED;
 
@@ -15,7 +17,10 @@ void fsm_for_input_processing(void){
         case BUTTON_RELEASED:
             if(is_button_pressed(0)){
                 buttonState = BUTTON_PRESSED;
-                // Thuc thi lenh khi nhan nut o day
+        		current_mode++;
+        		if (current_mode > 4) {
+        			current_mode = 1;
+        		}
             }
             break;
 
@@ -33,7 +38,6 @@ void fsm_for_input_processing(void){
             if(!is_button_pressed(0)){
                 buttonState = BUTTON_RELEASED;
             }
-            // Thuc thi lenh lap lai khi giu nut o day
             break;
     }
 }

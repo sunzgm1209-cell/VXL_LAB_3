@@ -29,11 +29,12 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f1xx_hal.h"
-#include "software_timer.h"
+
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "software_timer.h"
+#include "input_processing.h"
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
