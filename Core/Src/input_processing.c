@@ -120,6 +120,27 @@ void fsm_for_input_processing(void){
     		ledBuffer[1] = 4;
     		ledBuffer[2] = temp_green / 10;
     		ledBuffer[3] = temp_green % 10;
+
+    		if (is_button_pressed(1)){
+    			temp_green++;
+    			if (temp_green > 99) temp_green = 1;
+    		}
+
+    		if (is_button_pressed_1s(1)){
+    			auto_inc_counter++;
+    			if (auto_inc_counter > 25){
+    				temp_green++;
+    				if (temp_green > 99) temp_green = 1;
+    				auto_inc_counter = 0;
+    			}
+    		} else {
+    			auto_inc_counter = 0;
+    		}
+
+    		if (is_button_pressed(2)){
+    			time_green = temp_green;
+    			time_red = time_yellow + time_green;
+    		}
     		break;
     }
 }
