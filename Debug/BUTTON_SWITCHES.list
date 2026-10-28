@@ -449,10 +449,10 @@ void fsm_for_input_processing(void){
  8000398:	3301      	adds	r3, #1
  800039a:	4a15      	ldr	r2, [pc, #84]	; (80003f0 <fsm_for_input_processing+0x2a4>)
  800039c:	6013      	str	r3, [r2, #0]
-    			if (auto_inc_counter > 25){
+    			if (auto_inc_counter >= 25){
  800039e:	4b14      	ldr	r3, [pc, #80]	; (80003f0 <fsm_for_input_processing+0x2a4>)
  80003a0:	681b      	ldr	r3, [r3, #0]
- 80003a2:	2b19      	cmp	r3, #25
+ 80003a2:	2b18      	cmp	r3, #24
  80003a4:	dd29      	ble.n	80003fa <fsm_for_input_processing+0x2ae>
     				temp_yellow++;
  80003a6:	4b0d      	ldr	r3, [pc, #52]	; (80003dc <fsm_for_input_processing+0x290>)
