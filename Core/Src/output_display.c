@@ -14,6 +14,8 @@ int countdown2 = 0;
 
 int led_timer_id = -1;
 int led_id = -1;
+int blink_timer_id = -1;
+
 const int max = 4;
 int ledBuffer[4];
 int led_state = 0;
@@ -23,6 +25,8 @@ int time_green = 8;
 int time_yellow = 2;
 
 int traffic_status = 0;
+
+int blink_state = 0;
 
 void display7SEG(int num){
 	uint8_t seg7[10] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90};

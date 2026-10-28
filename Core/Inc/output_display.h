@@ -17,6 +17,8 @@ extern int countdown2;
 
 extern int led_timer_id;
 extern int led_id;
+extern int blink_timer_id;
+extern int blink_state;
 extern const int max;
 extern int led_state;
 

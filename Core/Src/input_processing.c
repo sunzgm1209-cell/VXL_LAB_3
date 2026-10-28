@@ -40,4 +40,27 @@ void fsm_for_input_processing(void){
             }
             break;
     }
+
+    switch(current_mode){
+    	case 1:
+    		break;
+    	case 2:
+    		ledBuffer[0] = 0;
+    		ledBuffer[1] = 2;
+    		ledBuffer[2] = time_red / 10;
+    		ledBuffer[3] = time_red % 10;
+    		break;
+    	case 3:
+    		ledBuffer[0] = 0;
+    		ledBuffer[1] = 3;
+    		ledBuffer[2] = time_yellow / 10;
+    		ledBuffer[3] = time_yellow % 10;
+    		break;
+    	case 4:
+    		ledBuffer[0] = 0;
+    		ledBuffer[1] = 4;
+    		ledBuffer[2] = time_green / 10;
+    		ledBuffer[3] = time_green % 10;
+    		break;
+    }
 }

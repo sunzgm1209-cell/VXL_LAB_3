@@ -1,4 +1,4 @@
-output_display.c:27:6:display7SEG	32	static
-output_display.c:43:6:update7SEG	16	static
-output_display.c:63:6:updateLedBuffer	4	static
-output_display.c:70:6:updateLed	8	static
+output_display.c:31:6:display7SEG	32	static
+output_display.c:47:6:update7SEG	16	static
+output_display.c:67:6:updateLedBuffer	4	static
+output_display.c:74:6:updateLed	8	static

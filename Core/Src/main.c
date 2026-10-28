@@ -92,8 +92,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   initTimers();
+
   led_timer_id = requestTimer();
   led_id = requestTimer();
+  blink_timer_id = requestTimer();
+
   traffic_status = 0;
   countdown1 = time_red;
   countdown2 = time_green;
@@ -106,6 +109,10 @@ int main(void)
 	  setTimer(led_id, 1000);
   }
 
+  if (blink_timer_id != -1){
+	  setTimer(blink_timer_id, 250);
+  }
+
   updateLed();
 
   /* USER CODE END 2 */
@@ -114,6 +121,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  fsm_for_input_processing();
+
 	  if (led_timer_id != -1 && timer_flags[led_timer_id] == 1){
 		  setTimer(led_timer_id, 100);
 		  update7SEG(led_state++);
@@ -122,17 +131,38 @@ int main(void)
 		  }
 	  }
 
-	  if (led_id != -1 && timer_flags[led_id] == 1){
-	      setTimer(led_id, 1000);
+	  if (blink_timer_id != -1 && timer_flags[blink_timer_id] == 1){
+		  setTimer(blink_timer_id, 250);
+		  blink_state = 1 - blink_state;
 
-	      countdown1--;
-          countdown2--;
+		  if (current_mode == 2){
+			  HAL_GPIO_WritePin(GPIOA, YELLOW_LED1_Pin | YELLOW_LED2_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_SET); // Tắt màu khác
+			  if (blink_state == 1) HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | RED_LED2_Pin, GPIO_PIN_RESET);
+              else HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | RED_LED2_Pin, GPIO_PIN_SET);
+		  } else if (current_mode == 3){
+			  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | RED_LED2_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_SET);
+			  if (blink_state == 1) HAL_GPIO_WritePin(GPIOA, YELLOW_LED1_Pin | YELLOW_LED2_Pin, GPIO_PIN_RESET);
+              else HAL_GPIO_WritePin(GPIOA, YELLOW_LED1_Pin | YELLOW_LED2_Pin, GPIO_PIN_SET);
+		  } else if (current_mode == 4){
+			  HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | RED_LED2_Pin | YELLOW_LED1_Pin | YELLOW_LED2_Pin, GPIO_PIN_SET);
+			  if (blink_state == 1) HAL_GPIO_WritePin(GPIOA, GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_RESET);
+              else HAL_GPIO_WritePin(GPIOA, GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_SET);
+		  }
+	  }
 
-	      if (countdown1 <= 0 || countdown2 <= 0) {
-	    	  traffic_status = (traffic_status + 1) % 4;
-	    	  updateLed();
-	      }
-	      updateLedBuffer();
+	  if(current_mode == 1){
+		  if (led_id != -1 && timer_flags[led_id] == 1){
+			  setTimer(led_id, 1000);
+
+			  countdown1--;
+			  countdown2--;
+
+			  if (countdown1 <= 0 || countdown2 <= 0) {
+				  traffic_status = (traffic_status + 1) % 4;
+				  updateLed();
+			  }
+			  updateLedBuffer();
+		  }
 	  }
     /* USER CODE END WHILE */
 
