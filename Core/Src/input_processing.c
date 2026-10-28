@@ -101,7 +101,7 @@ void fsm_for_input_processing(void){
 
     		if (is_button_pressed_1s(1)) {
     			auto_inc_counter++;
-    			if (auto_inc_counter > 25){
+    			if (auto_inc_counter >= 25){
     				temp_yellow++;
     				if (temp_yellow > 99) temp_yellow = 1;
     				auto_inc_counter = 0;
@@ -128,7 +128,7 @@ void fsm_for_input_processing(void){
 
     		if (is_button_pressed_1s(1)){
     			auto_inc_counter++;
-    			if (auto_inc_counter > 25){
+    			if (auto_inc_counter >= 25){
     				temp_green++;
     				if (temp_green > 99) temp_green = 1;
     				auto_inc_counter = 0;
