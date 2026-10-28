@@ -79,6 +79,13 @@ void fsm_for_input_processing(void){
 
     		if (is_button_pressed(2)){
     			time_red = temp_red;
+    			if (time_red > time_yellow) {
+    				time_green = time_red - time_yellow;
+    			} else {
+    				time_green = 1;
+    				time_yellow = time_red - 1;
+    				if (time_yellow < 1) time_yellow = 1;
+    			}
     		}
     		break;
     	case 3:
