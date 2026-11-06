@@ -136,7 +136,7 @@ int main(void)
 		  blink_state = 1 - blink_state;
 
 		  if (current_mode == 2){
-			  HAL_GPIO_WritePin(GPIOA, YELLOW_LED1_Pin | YELLOW_LED2_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_SET); // Tắt màu khác
+			  HAL_GPIO_WritePin(GPIOA, YELLOW_LED1_Pin | YELLOW_LED2_Pin | GREEN_LED1_Pin | GREEN_LED2_Pin, GPIO_PIN_SET);
 			  if (blink_state == 1) HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | RED_LED2_Pin, GPIO_PIN_RESET);
               else HAL_GPIO_WritePin(GPIOA, RED_LED1_Pin | RED_LED2_Pin, GPIO_PIN_SET);
 		  } else if (current_mode == 3){
