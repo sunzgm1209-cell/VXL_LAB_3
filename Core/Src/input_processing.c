@@ -20,6 +20,8 @@ void fsm_for_input_processing(void){
         		current_mode++;
         		if (current_mode > 4) {
         			current_mode = 1;
+        			traffic_status = 0;
+        			updateLed();
         		}
             }
             break;
